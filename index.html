@@ -2,124 +2,133 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Kamu ❤️</title>
+<title>Couple Page</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
-}
-
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    overflow:hidden;
-}
-
-.container{
-    text-align:center;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
-    padding:40px;
-    border-radius:20px;
-    color:white;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-
-h1{
-    font-size:2.5rem;
-    margin-bottom:15px;
-}
-
-p{
-    font-size:1.1rem;
-    margin-bottom:20px;
-}
-
-button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    background:white;
-    color:#ff4f81;
-    font-size:1rem;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:scale(1.08);
-}
-
-#message{
-    margin-top:20px;
-    font-size:1.2rem;
-    font-weight:bold;
-}
-
-.heart{
-    position:absolute;
-    color:white;
-    font-size:20px;
-    animation:float 6s linear infinite;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh) scale(0);
-        opacity:0;
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #ffe6f0;
+        overflow: hidden;
     }
-    20%{
-        opacity:1;
+
+    .page {
+        width: 100%;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
     }
-    100%{
-        transform:translateY(-100px) scale(1.5);
-        opacity:0;
+
+    .active {
+        display: flex;
     }
-}
+
+    h1 {
+        color: #d63384;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        background: #ff4d6d;
+        color: white;
+        font-size: 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #c9184a;
+    }
+
+    /* Bunga Lily */
+    .flower {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        animation: bloom 3s ease-in-out infinite alternate;
+    }
+
+    .petal {
+        position: absolute;
+        width: 60px;
+        height: 100px;
+        background: linear-gradient(#fff, #ffb6c1);
+        border-radius: 50%;
+        top: 10px;
+        left: 30px;
+        transform-origin: bottom center;
+    }
+
+    .petal:nth-child(1) { transform: rotate(0deg); }
+    .petal:nth-child(2) { transform: rotate(60deg); }
+    .petal:nth-child(3) { transform: rotate(120deg); }
+    .petal:nth-child(4) { transform: rotate(180deg); }
+    .petal:nth-child(5) { transform: rotate(240deg); }
+    .petal:nth-child(6) { transform: rotate(300deg); }
+
+    @keyframes bloom {
+        0% { transform: scale(0.8); }
+        100% { transform: scale(1.1); }
+    }
+
+    .center {
+        width: 30px;
+        height: 30px;
+        background: gold;
+        border-radius: 50%;
+        position: absolute;
+        top: 45px;
+        left: 45px;
+    }
+
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>❤️ Untuk Kamu ❤️</h1>
-    <p>Terima kasih sudah hadir dalam hidupku.</p>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>Untuk kamu yang spesial 💖</h1>
+    <p>Ada sesuatu kecil untukmu...</p>
+    <button onclick="nextPage()">Klik di sini</button>
+</div>
 
-    <button onclick="showLove()">
-        Klik Aku
-    </button>
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>🌸 Lily Mekar untukmu 🌸</h1>
 
-    <div id="message"></div>
+    <div class="flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="center"></div>
+    </div>
+
+    <!-- Musik -->
+    <audio id="music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6f3a0.mp3?filename=romantic-ambient-110401.mp3" type="audio/mpeg">
+    </audio>
+
+    <p>Semoga hari kamu seindah bunga ini 💕</p>
 </div>
 
 <script>
-function showLove(){
-    document.getElementById("message").innerHTML =
-    "Aku sayang kamu lebih dari kata-kata yang bisa diungkapkan ❤️";
+function nextPage() {
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+
+    // play music
+    let music = document.getElementById("music");
+    music.play();
 }
-
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.fontSize = (15 + Math.random() * 25) + "px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },6000);
-}
-
-setInterval(createHeart, 300);
 </script>
 
 </body>
