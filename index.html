@@ -2,90 +2,136 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Couple Page</title>
+<title>Lily Bloom v2</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background: #ffe6f0;
-        overflow: hidden;
+body {
+    margin: 0;
+    background: linear-gradient(#ffe6f0, #fff);
+    font-family: Arial;
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.active {
+    display: flex;
+}
+
+/* BUTTON */
+button {
+    padding: 12px 25px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    font-size: 18px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+/* ===== FLOWER AREA ===== */
+.flower-wrap {
+    position: relative;
+    width: 200px;
+    height: 400px;
+    margin-top: 20px;
+}
+
+/* STEM */
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 6px;
+    height: 0;
+    background: #2e8b57;
+    transform: translateX(-50%);
+    animation: growStem 2s forwards;
+}
+
+@keyframes growStem {
+    from { height: 0; }
+    to { height: 220px; }
+}
+
+/* FLOWER HEAD */
+.flower {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px) scale(0.3);
+    opacity: 0;
+    animation: riseBloom 3s 1.5s forwards;
+}
+
+/* RISE + BLOOM */
+@keyframes riseBloom {
+    0% {
+        transform: translateX(-50%) translateY(80px) scale(0.3);
+        opacity: 0;
     }
-
-    .page {
-        width: 100%;
-        height: 100vh;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
+    50% {
+        opacity: 1;
     }
-
-    .active {
-        display: flex;
+    100% {
+        transform: translateX(-50%) translateY(0px) scale(1);
+        opacity: 1;
     }
+}
 
-    h1 {
-        color: #d63384;
-    }
+/* PETALS */
+.petal {
+    position: absolute;
+    width: 50px;
+    height: 90px;
+    background: linear-gradient(#fff, #ffb6c1);
+    border-radius: 50%;
+    top: 0;
+    left: 25px;
+    transform-origin: bottom center;
+}
 
-    button {
-        padding: 12px 25px;
-        border: none;
-        background: #ff4d6d;
-        color: white;
-        font-size: 18px;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.petal:nth-child(1) { transform: rotate(0deg); }
+.petal:nth-child(2) { transform: rotate(60deg); }
+.petal:nth-child(3) { transform: rotate(120deg); }
+.petal:nth-child(4) { transform: rotate(180deg); }
+.petal:nth-child(5) { transform: rotate(240deg); }
+.petal:nth-child(6) { transform: rotate(300deg); }
 
-    button:hover {
-        background: #c9184a;
-    }
+/* CENTER */
+.center {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: gold;
+    border-radius: 50%;
+    top: 40px;
+    left: 37px;
+}
 
-    /* Bunga Lily */
-    .flower {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        animation: bloom 3s ease-in-out infinite alternate;
-    }
+/* glow */
+.glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255,192,203,0.5), transparent);
+    border-radius: 50%;
+    top: -20px;
+    left: -10px;
+    animation: glow 2s infinite alternate;
+}
 
-    .petal {
-        position: absolute;
-        width: 60px;
-        height: 100px;
-        background: linear-gradient(#fff, #ffb6c1);
-        border-radius: 50%;
-        top: 10px;
-        left: 30px;
-        transform-origin: bottom center;
-    }
-
-    .petal:nth-child(1) { transform: rotate(0deg); }
-    .petal:nth-child(2) { transform: rotate(60deg); }
-    .petal:nth-child(3) { transform: rotate(120deg); }
-    .petal:nth-child(4) { transform: rotate(180deg); }
-    .petal:nth-child(5) { transform: rotate(240deg); }
-    .petal:nth-child(6) { transform: rotate(300deg); }
-
-    @keyframes bloom {
-        0% { transform: scale(0.8); }
-        100% { transform: scale(1.1); }
-    }
-
-    .center {
-        width: 30px;
-        height: 30px;
-        background: gold;
-        border-radius: 50%;
-        position: absolute;
-        top: 45px;
-        left: 45px;
-    }
-
+@keyframes glow {
+    from { transform: scale(0.9); opacity: 0.5; }
+    to { transform: scale(1.2); opacity: 1; }
+}
 </style>
 </head>
 
@@ -93,41 +139,48 @@
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
-    <h1>Untuk kamu yang spesial 💖</h1>
-    <p>Ada sesuatu kecil untukmu...</p>
-    <button onclick="nextPage()">Klik di sini</button>
+    <h1>Untuk kamu 💖</h1>
+    <p>Ada bunga yang tumbuh spesial untukmu...</p>
+    <button onclick="show()">Klik</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
-    <h1>🌸 Lily Mekar untukmu 🌸</h1>
 
-    <div class="flower">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="center"></div>
+    <h1>🌸 Lily Bloom 🌸</h1>
+
+    <div class="flower-wrap">
+
+        <div class="stem"></div>
+
+        <div class="flower">
+            <div class="glow"></div>
+
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+
+            <div class="center"></div>
+        </div>
+
     </div>
 
-    <!-- Musik -->
     <audio id="music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6f3a0.mp3?filename=romantic-ambient-110401.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b6b6f3a0.mp3?filename=romantic-ambient-110401.mp3">
     </audio>
 
-    <p>Semoga hari kamu seindah bunga ini 💕</p>
+    <p>Seperti bunga ini, perasaan ini tumbuh perlahan 💕</p>
 </div>
 
 <script>
-function nextPage() {
+function show() {
     document.getElementById("page1").classList.remove("active");
     document.getElementById("page2").classList.add("active");
 
-    // play music
-    let music = document.getElementById("music");
-    music.play();
+    document.getElementById("music").play();
 }
 </script>
 
